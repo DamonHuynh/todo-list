@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+</head>
+<body>
+    <button id="addBtn">Add Todo</button>
+    <dialog>
+        <form action="" method="post" id="todo">
+            <div>
+                <label for="title">Title <span aria-label="required"></span></label>
+                <input type="text" name="title" id="title" required>
+            </div>
+            <div>
+                <label for="description">Description</label>
+                <input type="text" name="description" id="description">
+            </div>
+            <div>
+                <label for="dueDate">Due Date</label>
+                <input type="calendar" name="dueDate" id="dueDate">
+            </div>
+            <div>
+                <label for="priority">Priority 1</label>
+                <input type="radio" name="priority" id="priority">
+            </div>
+            <div>
+                <label for="priority">Priority 2</label>
+                <input type="radio" name="priority" id="priority">
+            </div>
+            <div>
+                <label for="priority">Priority 3</label>
+                <input type="radio" name="priority" id="priority">
+            </div>
+            <div>
+                <button id="cancelBtn">Cancel</button>
+                <button type="submit" form="todo">Add</button>
+            </div>
+        </form>
+    </dialog>
+</body>
+</html>
