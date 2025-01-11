@@ -4,6 +4,10 @@ const domManager = {
     cancelBtn : document.querySelector("#cancelBtn"),
     form : document.querySelector("#todo"),
     body : document.querySelector("body"),
+    titleForm : document.querySelector("#title"),
+    descriptionForm : document.querySelector("#description"),
+    dueDateForm : document.querySelector("#dueDate"),
+    priorityForm : document.querySelector("#priority"),
 }
 
 export{domManager};
