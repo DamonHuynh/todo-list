@@ -8,5 +8,10 @@ function removeBtn(){
 }
 
 function removeTodo(todo){
+
+}
+
+function getIndexOfTodo(arrayOfTodos){
+    const all = domManager.content.childNodes();
     
 }
