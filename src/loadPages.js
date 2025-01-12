@@ -6,21 +6,18 @@ const loadPages = function() {
         domManager.todoTab.addEventListener("click", () => {
             removeTodos();
             loadTodos(allTodos);
-            console.log("meow1");
         });
     }
     const today = function(){
         domManager.todayTab.addEventListener("click", () => {
             removeTodos();
             loadTodos(todayTodos);
-            console.log("meow2");
         });
     }
     const week = function(){
         domManager.weekTab.addEventListener("click", () => {
             removeTodos();
             loadTodos(weekTodos);
-            console.log("meow3");
         });
     }
     return {todos, today, week};
