@@ -12,10 +12,10 @@ function organizeByDate(todo){
     const nodeTodo = combineFields(todo)
     allTodos.push(nodeTodo);
     if (difference == 0){
-        todayTodos.push(nodeTodo.cloneNode());
+        todayTodos.push(nodeTodo);
     }
     if (difference < 7){
-        weekTodos.push(nodeTodo.cloneNode());
+        weekTodos.push(nodeTodo);
     }
 }
 
