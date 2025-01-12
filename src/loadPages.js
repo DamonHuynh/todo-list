@@ -1,3 +1,4 @@
+import { combineFields } from "./addTodo";
 import { domManager } from "./domManager";
 import { allTodos, todayTodos, weekTodos} from "./organizeDate";
 
@@ -25,7 +26,7 @@ const loadPages = function() {
 
 function loadTodos(todos){
     todos.forEach((todo) => {
-        domManager.content.appendChild(todo);
+        domManager.content.appendChild(combineFields(todo));
     });
 }
 

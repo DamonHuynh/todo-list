@@ -8,14 +8,12 @@ const weekTodos = [];
 
 function organizeByDate(todo){
     const difference = getDifference(todo);
-     //used combineFields so todo becomes a node that can be added to the DOM
-    const nodeTodo = combineFields(todo)
-    allTodos.push(nodeTodo);
+    allTodos.push(todo);
     if (difference == 0){
-        todayTodos.push(nodeTodo);
+        todayTodos.push(todo);
     }
     if (difference < 7){
-        weekTodos.push(nodeTodo);
+        weekTodos.push(todo);
     }
 }
 
