@@ -1,4 +1,6 @@
 import {differenceInCalendarDays} from "date-fns";
+import { combineFields } from "./addTodo";
+
 
 const allTodos = [];
 const todayTodos = [];
@@ -6,16 +8,14 @@ const weekTodos = [];
 
 function organizeByDate(todo){
     const difference = getDifference(todo);
-    allTodos.push(todo);
+     //used combineFields so todo becomes a node that can be added to the DOM
+    allTodos.push(combineFields(todo));
     if (difference == 0){
-        todayTodos.push(todo);
+        todayTodos.push(combineFields(todo));
     }
     if (difference < 7){
-        weekTodos.push(todo);
+        weekTodos.push(combineFields(todo));
     }
-    console.log(allTodos);
-    console.log(todayTodos);
-    console.log(weekTodos);
 }
 
 function getDifference(todo){

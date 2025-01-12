@@ -12,7 +12,7 @@ function todoForm(){
     });
     domManager.form.addEventListener("submit", (event) => {
         event.preventDefault();
-       createTodo(readForm()).addTodo();
+        addTodo();
     });
 }
 
@@ -57,18 +57,19 @@ const createTodo = function(todo){
     const addPriority = function(){
         //todo
     }
-    const combineFields = function(){
-        const container = addTitle();
-        container.appendChild(addDescription());
-        container.appendChild(addDueDate());
-        return container;
-    }
-    const addTodo = function(){
-        domManager.content.appendChild(combineFields());
-    }
-    return {addTodo};
+    return {addTitle, addDescription, addDueDate};
 }
 
+function combineFields(todo){
+    const container = createTodo(todo).addTitle();
+    container.appendChild(createTodo(todo).addDescription());
+    container.appendChild(createTodo(todo).addDueDate());
+    return container;
+}
 
+function addTodo(){
+    const todo = readForm();
+    domManager.content.appendChild(combineFields(todo));
+}
 
-export{todoForm};
+export{todoForm, combineFields};

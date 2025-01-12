@@ -29,6 +29,9 @@ body{
     height: 100vh;
     position: sticky;
 }
+.tabs{
+    cursor: pointer;
+}
 
 
 #content{
@@ -45,3 +48,4 @@ body{
     fill: white;
     height: 1rem;
 }
+

@@ -8,7 +8,7 @@ const domManager = {
     descriptionForm : document.querySelector("#description"),
     dueDateForm : document.querySelector("#dueDate"),
     priorityForm : document.querySelector("#priority"),
-    todoTab : document.querySelector("#todo"),
+    todoTab : document.querySelector("#todos"),
     todayTab : document.querySelector("#today"),
     weekTab : document.querySelector("#week"),
     projectTab : document.querySelector("#projects")
