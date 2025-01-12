@@ -4,19 +4,19 @@ import { allTodos, todayTodos, weekTodos} from "./organizeDate";
 const loadPages = function() {
     const todos = function() {
         domManager.todoTab.addEventListener("click", () => {
-            removeTodos();
+            clearPage();
             loadTodos(allTodos);
         });
     }
     const today = function(){
         domManager.todayTab.addEventListener("click", () => {
-            removeTodos();
+            clearPage();
             loadTodos(todayTodos);
         });
     }
     const week = function(){
         domManager.weekTab.addEventListener("click", () => {
-            removeTodos();
+            clearPage();
             loadTodos(weekTodos);
         });
     }
@@ -29,7 +29,7 @@ function loadTodos(todos){
     });
 }
 
-function removeTodos(){
+function clearPage(){
     const all = domManager.content.childNodes;
     for (let i = all.length - 1; i >= 0; i--) {
         domManager.content.removeChild(all[i]);
