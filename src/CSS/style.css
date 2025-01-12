@@ -44,8 +44,7 @@ body{
     color: var(--add-todo)
 }
 
-.calendarIcon{
-    fill: white;
+.calendarIcon, .editIcon, .removeIcon{
     height: 1rem;
 }
 

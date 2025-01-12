@@ -62,7 +62,7 @@ const createTodo = function(todo){
     }
     const addCompleteBtn = function(){
         const complete = document.createElement("div");
-        calendarIcon.classList.toggle("completeBtn");
+        complete.classList.toggle("completeBtn");
         return complete;
     }
     const addRemoveBtn = function(){
