@@ -6,11 +6,15 @@
     --sidebar: #262626;
     --text: white;
     --add-todo: #f07f75;
+    box-sizing: border-box;
+    font-family: "Josefin Sans";
+    
 }
 
 body{
     display: grid;
     grid-template-columns: 1fr 4fr;
+    gap: 10rem;
     background-color: var(--main-background);
     color: var(--text);
     height: 100vh;
@@ -26,8 +30,13 @@ body{
     position: sticky;
 }
 
+#logo{
+}
+
 #content{
     overflow: scroll;
+    color: var(--text);
+    padding-top: 3rem;
 }
 
 #addBtn{

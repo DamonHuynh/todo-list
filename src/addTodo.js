@@ -26,8 +26,9 @@ function createTodo(){
 
 function addTodo(todo){
     const container = document.createElement("div");
+    container.classList.add("todo");
     container.textContent = todo.title;
-    domManager.body.appendChild(container);
+    domManager.content.appendChild(container);
 }
 
-export{todoForm, createTodo};
+export{todoForm};

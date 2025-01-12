@@ -3,7 +3,7 @@ const domManager = {
     addBtn : document.querySelector("#addBtn"),
     cancelBtn : document.querySelector("#cancelBtn"),
     form : document.querySelector("#todo"),
-    body : document.querySelector("body"),
+    content : document.querySelector("#content"),
     titleForm : document.querySelector("#title"),
     descriptionForm : document.querySelector("#description"),
     dueDateForm : document.querySelector("#dueDate"),
