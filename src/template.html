@@ -9,10 +9,10 @@
     <div id="sidebar">
         <div class="" id="logo">To-do List</div>
         <button id="addBtn">Add Todo</button>
-        <div>Todos</div>
-        <div>Today</div>
-        <div>Week</div>
-        <div>Projects</div>
+        <div id="todos">Todos</div>
+        <div id="today">Today</div>
+        <div id="week">Week</div>
+        <div id="Projects">Projects</div>
     </div>
     <div id="content"></div>
     <dialog>
@@ -31,19 +31,19 @@
             </div>
             <div>
                 <label for="priority">Priority 1</label>
-                <input type="radio" name="priority" id="priority">
-            </div>
-            <div>
-                <label for="priority">Priority 2</label>
                 <input type="radio" name="priority" id="priority" value="1">
             </div>
             <div>
-                <label for="priority">Priority 3</label>
+                <label for="priority">Priority 2</label>
                 <input type="radio" name="priority" id="priority" value="2">
             </div>
             <div>
+                <label for="priority">Priority 3</label>
+                <input type="radio" name="priority" id="priority" value="3">
+            </div>
+            <div>
                 <button id="cancelBtn">Cancel</button>
-                <button type="submit" form="todo" value="3">Add</button>
+                <button type="submit" form="todo" >Add</button>
             </div>
         </form>
     </dialog>

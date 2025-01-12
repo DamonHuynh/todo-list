@@ -34,5 +34,5 @@ function normalizeDate(date){
     return date;
 }
 
-export{organizeByDate};
+export{organizeByDate, allTodos, todayTodos, weekTodos};
 
