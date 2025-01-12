@@ -1,3 +1,3 @@
-import { addTodo } from "./addTodo"
+import { todoForm } from "./addTodo"
 
-addTodo();
+todoForm();
