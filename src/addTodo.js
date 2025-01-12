@@ -1,5 +1,6 @@
-import { domManager } from "./domManager";
+import {domManager } from "./domManager";
 import {Todo} from "./todoClass";
+import {organizeByDate} from "./organizeDate";
 import calendar from "./icons/calendar.svg";
 function todoForm(){
     domManager.addBtn.addEventListener("click", () => {
@@ -18,25 +19,14 @@ function todoForm(){
 function readForm(){
     let title = domManager.titleForm.value;
     let description = domManager.descriptionForm.value;
-    let dueDate = domManager.dueDateForm.value;
+    /*replace all - with / so the date will be interpreted in local time */
+    let dueDate = domManager.dueDateForm.value.replaceAll("-","/");
     let priority = domManager.priorityForm.value;
     domManager.dialog.close();
     const todo = new Todo(title, description, dueDate, priority);
+    organizeByDate(todo);
     return todo;
 }
-
-// function addTodo(todo){
-//     const description = document.createElement("p");
-//     const calendarIcon = document.createElement("img");
-//     calendarIcon.src = calendar;
-//     calendarIcon.classList.toggle("calendarIcon");
-//     const dueDate = document.createElement("p");
-//     dueDate.textContent = todo.dueDate;
-//     container.appendChild(description);
-//     container.appendChild(calendarIcon);
-//     container.appendChild(dueDate);
-//     domManager.content.appendChild(container);
-// }
 
 const createTodo = function(todo){
     const addTitle = function() {
