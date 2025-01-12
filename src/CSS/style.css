@@ -30,8 +30,6 @@ body{
     position: sticky;
 }
 
-#logo{
-}
 
 #content{
     overflow: scroll;
@@ -41,4 +39,9 @@ body{
 
 #addBtn{
     color: var(--add-todo)
+}
+
+.calendarIcon{
+    color: white;
+    height: 1rem;
 }
