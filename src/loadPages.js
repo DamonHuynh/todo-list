@@ -31,11 +31,10 @@ function loadTodos(todos){
 
 function removeTodos(){
     const all = domManager.content.childNodes;
-    if (all[0] !== null){
-        all.forEach((node) => {
-            domManager.content.removeChild(node);
-        })
-    }
+    for (let i = all.length - 1; i >= 0; i--) {
+        domManager.content.removeChild(all[i]);
+      }
+
 }
 
 function loadAllPages(){
