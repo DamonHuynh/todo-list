@@ -11,7 +11,9 @@ const domManager = {
     todoTab : document.querySelector("#todos"),
     todayTab : document.querySelector("#today"),
     weekTab : document.querySelector("#week"),
-    projectTab : document.querySelector("#projects")
+    projectTab : document.querySelector("#projects"),
+    editBtn : document.querySelector(".editIcon"),
+    removeBtn : document.querySelector(".removeIcon")
 }
 
 export{domManager};
