@@ -1,1 +1,35 @@
 @import "reset.css";
+@import url('https://fonts.googleapis.com/css2?family=Cabin+Sketch:wght@400;700&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap');
+
+:root{
+    --main-background: #1e1e1d;
+    --sidebar: #262626;
+    --text: white;
+    --add-todo: #f07f75;
+}
+
+body{
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    background-color: var(--main-background);
+    color: var(--text);
+    height: 100vh;
+    overflow: hidden;
+}
+#sidebar{
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding: 1rem;
+    background-color: var(--sidebar);
+    height: 100vh;
+    position: sticky;
+}
+
+#content{
+    overflow: scroll;
+}
+
+#addBtn{
+    color: var(--add-todo)
+}
