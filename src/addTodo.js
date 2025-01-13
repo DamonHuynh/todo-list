@@ -1,9 +1,11 @@
 import {domManager } from "./domManager";
 import {Todo} from "./todoClass";
-import {organizeByDate} from "./organizeDate";
+import {allTodos, organizeByDate, todayTodos, weekTodos} from "./organizeDate";
 import calendar from "./icons/calendar.svg";
 import edit from "./icons/edit.svg";
 import remove from "./icons/remove.svg";
+import { addRemoveLogic } from "./todoController";
+import { loadPages, loadTodos } from "./loadPages";
 
 function todoForm(){
     domManager.addBtn.addEventListener("click", () => {
@@ -27,7 +29,6 @@ function readForm(){
     let priority = domManager.priorityForm.value;
     domManager.dialog.close();
     const todo = new Todo(title, description, dueDate, priority);
-    organizeByDate(todo);
     return todo;
 }
 
@@ -67,6 +68,7 @@ const createTodo = function(todo){
     }
     const addRemoveBtn = function(){
         const removeContainer = document.createElement("div");
+        addRemoveLogic(removeContainer);
         const removeIcon = document.createElement("img");
         removeIcon.src = remove;
         removeContainer.appendChild(removeIcon);
@@ -97,7 +99,16 @@ function combineFields(todo){
 
 function addTodo(){
     const todo = readForm();
-    domManager.content.appendChild(combineFields(todo));
+    organizeByDate(todo);
+    if (loadPages().pageTracker == "todos"){
+        loadTodos(allTodos);
+    }
+    if (loadPages().pageTracker == "today"){
+        loadTodos(todayTodos);
+    }
+    if (loadPages().pageTracker == "week"){
+        loadTodos(weekTodos);
+    }
 }
 
 export{todoForm, combineFields};

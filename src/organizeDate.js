@@ -8,12 +8,13 @@ const weekTodos = [];
 
 function organizeByDate(todo){
     const difference = getDifference(todo);
-    allTodos.push(todo);
+    const nodeTodo = combineFields(todo);
+    allTodos.push(nodeTodo);
     if (difference == 0){
-        todayTodos.push(todo);
+        todayTodos.push(nodeTodo);
     }
     if (difference < 7){
-        weekTodos.push(todo);
+        weekTodos.push(nodeTodo);
     }
 }
 
@@ -21,8 +22,6 @@ function getDifference(todo){
     const currentDate = normalizeDate(new Date());
     const dueDate = new Date(todo.dueDate);
     const difference = differenceInCalendarDays(dueDate, currentDate);
-    console.log(currentDate);
-    console.log(dueDate);
     return difference;
 }
 

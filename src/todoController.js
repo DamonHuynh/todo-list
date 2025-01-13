@@ -1,17 +1,20 @@
 import { domManager } from "./domManager";
 import { allTodos, todayTodos, weekTodos} from "./organizeDate";
 
-function removeBtn(){
-    domManager.removeBtn.addEventListener("click", () =>{
-        
+function addRemoveLogic(removeBtnContainer){
+    removeBtnContainer.addEventListener("click", () =>{
+        const todo = removeBtnContainer.parentNode;
+        cleanArrays(todo, allTodos);
+        // cleanArrays(todo, todayTodos);
+        // cleanArrays(todo, weekTodos);
+        todo.remove();
     })
 }
 
-function removeTodo(todo){
-
+function cleanArrays(todo, todoArray){
+    let index = todoArray.indexOf(todo);
+    todoArray.splice(index, 1);
+    console.log(index);
+    console.log(allTodos);
 }
-
-function getIndexOfTodo(arrayOfTodos){
-    const all = domManager.content.childNodes();
-    
-}
+export {addRemoveLogic};

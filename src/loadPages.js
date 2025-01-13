@@ -3,30 +3,34 @@ import { domManager } from "./domManager";
 import { allTodos, todayTodos, weekTodos} from "./organizeDate";
 
 const loadPages = function() {
+    let pageTracker = "todos";
     const todos = function() {
         domManager.todoTab.addEventListener("click", () => {
             clearPage();
             loadTodos(allTodos);
+            pageTracker = "todos";
         });
     }
     const today = function(){
         domManager.todayTab.addEventListener("click", () => {
             clearPage();
             loadTodos(todayTodos);
+            pageTracker = "today";
         });
     }
     const week = function(){
         domManager.weekTab.addEventListener("click", () => {
             clearPage();
             loadTodos(weekTodos);
+            pageTracker = "week"
         });
     }
-    return {todos, today, week};
+    return {todos, today, week, pageTracker};
 }
 
 function loadTodos(todos){
     todos.forEach((todo) => {
-        domManager.content.appendChild(combineFields(todo));
+        domManager.content.appendChild(todo);
     });
 }
 
@@ -44,4 +48,4 @@ function loadAllPages(){
     loadPages().week();
 }
 
-export{loadAllPages};
+export{loadAllPages, loadPages, loadTodos};
