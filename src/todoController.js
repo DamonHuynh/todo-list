@@ -21,9 +21,19 @@ function addEditLogic(expandBtn){
     domManager.titleExpand.value = elements[0].textContent;
     domManager.descriptionExpand.value = elements[1].textContent;
     //Need to use - instead of / for date formatting
-    domManager.dueDateExpand.value = elements[2].textContent.replaceAll("/","-");;
+    domManager.dueDateExpand.value = elements[2].textContent.replaceAll("/","-");
+    const priority = elements[3].textContent;
+    const radios = domManager.priorityExpand;
+    checkRadio(radios, priority);
 }
-
+function checkRadio(radios, priority){
+    for (let i = 0; i < radios.length; i++){
+        if (radios[i].value == priority){
+            radios[i].checked = true;
+            break;
+        }
+    }
+}
 
 function cleanArray(todo, todoArray){
     let index = todoArray.indexOf(todo);

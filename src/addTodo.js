@@ -1,36 +1,9 @@
-import {domManager } from "./domManager";
-import {Todo} from "./todoClass";
 import {allTodos, organizeByDate, todayTodos, weekTodos} from "./organizeDate";
 import calendar from "./icons/calendar.svg";
 import remove from "./icons/remove.svg";
 import { addExpandLogic, addRemoveLogic } from "./todoController";
 import { loadPages, loadTodos } from "./loadPages";
-
-function todoForm(){
-    domManager.addBtn.addEventListener("click", () => {
-        domManager.form.reset();
-        domManager.dialog.showModal();
-    });
-    domManager.cancelBtn.addEventListener("click", (event) => {
-        event.preventDefault();
-        domManager.dialog.close()
-    });
-    domManager.form.addEventListener("submit", (event) => {
-        event.preventDefault();
-        addTodo();
-    });
-}
-
-function readForm(){
-    let title = domManager.titleForm.value;
-    let description = domManager.descriptionForm.value;
-    /*replace all - with / so the date will be interpreted in local time */
-    let dueDate = domManager.dueDateForm.value.replaceAll("-","/");
-    let priority = domManager.priorityForm.value;
-    domManager.dialog.close();
-    const todo = new Todo(title, description, dueDate, priority);
-    return todo;
-}
+import { readForm } from "./forms";
 
 const createTodo = function(todo){
     const addTitle = function() {
@@ -63,8 +36,20 @@ const createTodo = function(todo){
         }
         return date;
     }
-    const addPriority = function(){
-        //todo
+    const addPriority = function(completeBtn){
+        const priority = document.createElement("div");
+        priority.textContent = todo.priority;
+        priority.classList.toggle("priority");
+        if(todo.priority == 1){
+            completeBtn.classList.toggle("priority1");
+        }
+        if(todo.priority == 2){
+            completeBtn.classList.toggle("priority2");
+        }
+        if(todo.priority == 1){
+            completeBtn.classList.toggle("priority3");
+        }
+        return priority;
     }
     const addCompleteBtn = function(){
         const complete = document.createElement("div");
@@ -88,17 +73,18 @@ const createTodo = function(todo){
         expandBtn.classList.toggle("expandBtn");
         return expandBtn
     }
-    return {addTitle, addDescription, addDueDate, addCompleteBtn, addRemoveBtn, addExpandBtn};
+    return {addTitle, addDescription, addDueDate, addPriority, addCompleteBtn, addRemoveBtn, addExpandBtn};
 }
 
 function combineFields(todo){
     const container = createTodo(todo).addTitle();
+    const completeBtn = createTodo(todo).addCompleteBtn();
     container.appendChild(createTodo(todo).addDescription());
     container.appendChild(createTodo(todo).addDueDate());
-    container.appendChild(createTodo(todo).addCompleteBtn());
+    container.appendChild(createTodo(todo).addPriority(completeBtn));
+    container.appendChild(completeBtn);
     container.appendChild(createTodo(todo).addRemoveBtn());
     container.appendChild(createTodo(todo).addExpandBtn());
-    
     return container;
 }
 
@@ -116,4 +102,4 @@ function addTodo(){
     }
 }
 
-export{todoForm, combineFields};
+export{combineFields, addTodo};

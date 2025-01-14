@@ -1,5 +1,5 @@
 import "./CSS/style.css";
-import { todoForm } from "./addTodo";
+import { todoForm } from "./forms.js";
 import {loadAllPages} from "./loadPages";
 todoForm();
 loadAllPages();

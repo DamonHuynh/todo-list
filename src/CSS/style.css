@@ -94,6 +94,9 @@ body{
 .description{
     display: none;
 }
+.priority{
+    display: none;
+}
 
 #expand{
     background-color: white;
