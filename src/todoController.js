@@ -4,17 +4,21 @@ import { allTodos, todayTodos, weekTodos} from "./organizeDate";
 function addRemoveLogic(removeBtnContainer){
     removeBtnContainer.addEventListener("click", () =>{
         const todo = removeBtnContainer.parentNode;
-        cleanArrays(todo, allTodos);
-        cleanArrays(todo, todayTodos);
-        cleanArrays(todo, weekTodos);
+        cleanAllArrays(todo);
         todo.remove();
     })
 }
-function cleanArrays(todo, todoArray){
+function cleanArray(todo, todoArray){
     let index = todoArray.indexOf(todo);
     if (index !== -1){
         todoArray.splice(index, 1);
     }
+}
+
+function cleanAllArrays(todo){
+    cleanArray(todo, allTodos);
+    cleanArray(todo, todayTodos);
+    cleanArray(todo, weekTodos);
 }
 
 

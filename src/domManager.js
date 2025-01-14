@@ -2,7 +2,7 @@ const domManager = {
     dialog : document.querySelector("dialog"),
     addBtn : document.querySelector("#addBtn"),
     cancelBtn : document.querySelector("#cancelBtn"),
-    form : document.querySelector("#todo"),
+    form : document.querySelector("#addTodo"),
     content : document.querySelector("#content"),
     titleForm : document.querySelector("#title"),
     descriptionForm : document.querySelector("#description"),

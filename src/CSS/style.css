@@ -13,8 +13,7 @@
 
 body{
     display: grid;
-    grid-template-columns: 1fr 4fr;
-    gap: 10rem;
+    grid-template-columns: 1fr 1fr 4fr 1fr;
     background-color: var(--main-background);
     color: var(--text);
     height: 100vh;
@@ -38,6 +37,8 @@ body{
     overflow: scroll;
     color: var(--text);
     padding-top: 3rem;
+    grid-column-start: 3;
+    grid-column-end: 4;
 }
 
 #addBtn{
@@ -48,3 +49,39 @@ body{
     height: 1rem;
 }
 
+.todo{
+    display: grid;
+    grid-template-columns: 1fr 1fr 8fr 2fr 2fr;
+    grid-template-rows: 1fr;
+    grid-template-areas: 
+    "complete title . date remove";
+    padding: 1rem;
+    border-bottom: .5px solid rgba(128, 128, 128, 0.492);
+}
+.title{
+    font-size: 1rem;
+    grid-area: title;
+}
+.date{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-area: date;
+}
+
+.completeBtn{
+    height: 1rem;
+    width: 1rem;
+    border-radius: 50%;
+    background-color: blue;
+    grid-area: complete;
+
+}
+
+.removeBtn{
+    width: fit-content;
+    grid-area: remove;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -12,7 +12,8 @@ function todoForm(){
         domManager.form.reset();
         domManager.dialog.showModal();
     });
-    domManager.cancelBtn.addEventListener("click", () => {
+    domManager.cancelBtn.addEventListener("click", (event) => {
+        event.preventDefault();
         domManager.dialog.close()
     });
     domManager.form.addEventListener("submit", (event) => {
@@ -36,6 +37,7 @@ const createTodo = function(todo){
     const addTitle = function() {
         const container = document.createElement("div");
         const title = document.createElement("p");
+        title.classList.toggle("title");
         title.textContent = todo.title;
         container.appendChild(title);
         container.classList.add("todo");
@@ -49,6 +51,7 @@ const createTodo = function(todo){
     }
     const addDueDate = function() {
         const date = document.createElement("div");
+        date.classList.toggle("date");
         if (todo.dueDate !== ""){
             const calendarIcon = document.createElement("img");
             calendarIcon.src = calendar;
@@ -65,11 +68,13 @@ const createTodo = function(todo){
     }
     const addCompleteBtn = function(){
         const complete = document.createElement("div");
+        addRemoveLogic(complete);
         complete.classList.toggle("completeBtn");
         return complete;
     }
     const addRemoveBtn = function(){
         const removeContainer = document.createElement("div");
+        removeContainer.classList.toggle("removeBtn");
         addRemoveLogic(removeContainer);
         const removeIcon = document.createElement("img");
         removeIcon.src = remove;
@@ -84,7 +89,6 @@ function combineFields(todo){
     const container = createTodo(todo).addTitle();
     container.appendChild(createTodo(todo).addCompleteBtn());
     container.appendChild(createTodo(todo).addRemoveBtn());
-    container.appendChild(createTodo(todo).addDescription());
     container.appendChild(createTodo(todo).addDueDate());
     return container;
 }
