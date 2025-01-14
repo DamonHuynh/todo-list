@@ -1,9 +1,10 @@
 import {allTodos, organizeByDate, todayTodos, weekTodos} from "./organizeDate";
 import calendar from "./icons/calendar.svg";
 import remove from "./icons/remove.svg";
-import { addExpandLogic, addRemoveLogic } from "./todoController";
+import { addEditLogic, addRemoveLogic } from "./todoController";
 import { loadPages, loadTodos } from "./loadPages";
 import { readForm } from "./forms";
+import { domManager } from "./domManager";
 
 const createTodo = function(todo){
     const addTitle = function() {
@@ -18,7 +19,7 @@ const createTodo = function(todo){
     const addDescription = function(){
         const description = document.createElement("p");
         description.textContent = todo.description;
-        description.classList.toggle("description");
+        description.classList.toggle("hidden");
         return description;
 
     }
@@ -39,16 +40,7 @@ const createTodo = function(todo){
     const addPriority = function(completeBtn){
         const priority = document.createElement("div");
         priority.textContent = todo.priority;
-        priority.classList.toggle("priority");
-        if(todo.priority == 1){
-            completeBtn.classList.toggle("priority1");
-        }
-        if(todo.priority == 2){
-            completeBtn.classList.toggle("priority2");
-        }
-        if(todo.priority == 1){
-            completeBtn.classList.toggle("priority3");
-        }
+        priority.classList.toggle("hidden");
         return priority;
     }
     const addCompleteBtn = function(){
@@ -69,7 +61,7 @@ const createTodo = function(todo){
     }
     const addExpandBtn = function(){
         const expandBtn = document.createElement("div");
-        addExpandLogic(expandBtn);
+        addEditLogic(expandBtn);
         expandBtn.classList.toggle("expandBtn");
         return expandBtn
     }
@@ -79,13 +71,30 @@ const createTodo = function(todo){
 function combineFields(todo){
     const container = createTodo(todo).addTitle();
     const completeBtn = createTodo(todo).addCompleteBtn();
+    showPriority(todo.priority, completeBtn);
     container.appendChild(createTodo(todo).addDescription());
     container.appendChild(createTodo(todo).addDueDate());
-    container.appendChild(createTodo(todo).addPriority(completeBtn));
+    container.appendChild(createTodo(todo).addPriority());
     container.appendChild(completeBtn);
     container.appendChild(createTodo(todo).addRemoveBtn());
     container.appendChild(createTodo(todo).addExpandBtn());
     return container;
+}
+
+function showPriority(priority, completeBtn){
+    if(priority == 1){
+        completeBtn.classList.add("priority1");
+        completeBtn.classList.remove("priority2");
+        completeBtn.classList.remove("priority3");
+    }
+    if(priority == 2){
+        completeBtn.classList.remove("priority1");
+        completeBtn.classList.add("priority2");
+        completeBtn.classList.remove("priority3");    }
+    if(priority == 3){
+        completeBtn.classList.remove("priority1");
+        completeBtn.classList.remove("priority2");
+        completeBtn.classList.add("priority3");    }
 }
 
 function addTodo(){
@@ -102,4 +111,4 @@ function addTodo(){
     }
 }
 
-export{combineFields, addTodo};
+export{combineFields, addTodo, showPriority};

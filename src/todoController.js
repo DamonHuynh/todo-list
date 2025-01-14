@@ -1,5 +1,7 @@
+import { showPriority } from "./addTodo";
 import { domManager } from "./domManager";
-import { allTodos, todayTodos, weekTodos} from "./organizeDate";
+import { readRadioForm } from "./forms";
+import { allTodos, todayTodos, weekTodos, reorganizeTodos} from "./organizeDate";
 
 function addRemoveLogic(removeBtnContainer){
     removeBtnContainer.addEventListener("click", () =>{
@@ -9,14 +11,41 @@ function addRemoveLogic(removeBtnContainer){
     })
 }
 
-function addExpandLogic(expandBtn){
+function addEditLogic(expandBtn){
     expandBtn.addEventListener("click", ()=>{
         domManager.expand.showModal();
-        addEditLogic(expandBtn);
+        expand(expandBtn);
+    });
+    domManager.cancelBtnExpand.addEventListener("click", (event) =>{
+        event.preventDefault();
+        domManager.expand.close();
+    });
+    domManager.saveBtnExpand.addEventListener("click", (event) =>{
+        event.preventDefault();
+        domManager.expand.close();
+        edit(expandBtn);
     })
 }
 
-function addEditLogic(expandBtn){
+function edit(expandBtn){
+    const elements = expandBtn.parentNode.children;
+    elements[0].textContent = domManager.titleExpand.value;
+    elements[1].textContent = domManager.descriptionExpand.value;
+    /*replace all - with / so the date will be interpreted in local time */
+    elements[2].textContent = domManager.dueDateExpand.value.replaceAll("-", "/");
+    const radios = domManager.priorityExpand;
+    const priority = readRadioForm(radios);
+    elements[3].textContent = priority;
+    //elements[4] is the complete button
+    showPriority(priority, elements[4]);
+    reorganizeTodos();
+    console.log(allTodos);
+    console.log(todayTodos);
+    console.log(weekTodos);
+}
+
+
+function expand(expandBtn){
     const elements = expandBtn.parentNode.children;
     domManager.titleExpand.value = elements[0].textContent;
     domManager.descriptionExpand.value = elements[1].textContent;
@@ -26,6 +55,7 @@ function addEditLogic(expandBtn){
     const radios = domManager.priorityExpand;
     checkRadio(radios, priority);
 }
+
 function checkRadio(radios, priority){
     for (let i = 0; i < radios.length; i++){
         if (radios[i].value == priority){
@@ -51,4 +81,4 @@ function cleanAllArrays(todo){
 
 
 
-export {addRemoveLogic, addExpandLogic};
+export {addRemoveLogic, addEditLogic, cleanArray};

@@ -18,7 +18,9 @@ const domManager = {
     titleExpand : document.querySelector("#titleExpand"),
     descriptionExpand : document.querySelector("#descriptionExpand"),
     dueDateExpand : document.querySelector("#dueDateExpand"),
-    priorityExpand : document.querySelectorAll("input[name='priorityExpand']")
+    priorityExpand : document.querySelectorAll("input[name='priorityExpand']"),
+    cancelBtnExpand : document.querySelector("#cancelBtnExpand"),
+    saveBtnExpand : document.querySelector("#saveBtnExpand"),
     
 }
 

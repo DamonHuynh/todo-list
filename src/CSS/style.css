@@ -91,13 +91,20 @@ body{
     cursor: pointer;
 }
 
-.description{
-    display: none;
-}
-.priority{
+.hidden{
     display: none;
 }
 
 #expand{
     background-color: white;
+}
+
+.priority1{
+    background-color: red;
+}
+.priority2{
+    background-color: green;
+}
+.priority3{
+    background-color: blue;
 }
