@@ -2,9 +2,8 @@ import {domManager } from "./domManager";
 import {Todo} from "./todoClass";
 import {allTodos, organizeByDate, todayTodos, weekTodos} from "./organizeDate";
 import calendar from "./icons/calendar.svg";
-import edit from "./icons/edit.svg";
 import remove from "./icons/remove.svg";
-import { addRemoveLogic } from "./todoController";
+import { addExpandLogic, addRemoveLogic } from "./todoController";
 import { loadPages, loadTodos } from "./loadPages";
 
 function todoForm(){
@@ -46,6 +45,7 @@ const createTodo = function(todo){
     const addDescription = function(){
         const description = document.createElement("p");
         description.textContent = todo.description;
+        description.classList.toggle("description");
         return description;
 
     }
@@ -82,14 +82,23 @@ const createTodo = function(todo){
         removeIcon.classList.toggle("removeIcon");
         return removeContainer;
     }
-    return {addTitle, addDescription, addDueDate, addCompleteBtn, addRemoveBtn};
+    const addExpandBtn = function(){
+        const expandBtn = document.createElement("div");
+        addExpandLogic(expandBtn);
+        expandBtn.classList.toggle("expandBtn");
+        return expandBtn
+    }
+    return {addTitle, addDescription, addDueDate, addCompleteBtn, addRemoveBtn, addExpandBtn};
 }
 
 function combineFields(todo){
     const container = createTodo(todo).addTitle();
+    container.appendChild(createTodo(todo).addDescription());
+    container.appendChild(createTodo(todo).addDueDate());
     container.appendChild(createTodo(todo).addCompleteBtn());
     container.appendChild(createTodo(todo).addRemoveBtn());
-    container.appendChild(createTodo(todo).addDueDate());
+    container.appendChild(createTodo(todo).addExpandBtn());
+    
     return container;
 }
 

@@ -54,7 +54,7 @@ body{
     grid-template-columns: 1fr 1fr 8fr 2fr 2fr;
     grid-template-rows: 1fr;
     grid-template-areas: 
-    "complete title . date remove";
+    "complete title expand date remove";
     padding: 1rem;
     border-bottom: .5px solid rgba(128, 128, 128, 0.492);
 }
@@ -84,4 +84,17 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+}
+.expandBtn{
+    grid-area: expand;
+    background-color: white;
+    cursor: pointer;
+}
+
+.description{
+    display: none;
+}
+
+#expand{
+    background-color: white;
 }

@@ -1,5 +1,5 @@
 const domManager = {
-    dialog : document.querySelector("dialog"),
+    dialog : document.querySelector("#add"),
     addBtn : document.querySelector("#addBtn"),
     cancelBtn : document.querySelector("#cancelBtn"),
     form : document.querySelector("#addTodo"),
@@ -13,7 +13,13 @@ const domManager = {
     weekTab : document.querySelector("#week"),
     projectTab : document.querySelector("#projects"),
     editBtns : document.querySelectorAll(".editIcon"),
-    removeBtns : document.querySelectorAll(".removeIcon")
+    removeBtns : document.querySelectorAll(".removeIcon"),
+    expand : document.querySelector("#expand"),
+    titleExpand : document.querySelector("#titleExpand"),
+    descriptionExpand : document.querySelector("#descriptionExpand"),
+    dueDateExpand : document.querySelector("#dueDateExpand"),
+    priorityExpand : document.querySelector("#priorityExpand")
+    
 }
 
 export{domManager};

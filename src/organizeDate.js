@@ -1,7 +1,7 @@
 import {differenceInCalendarDays} from "date-fns";
 import { combineFields } from "./addTodo";
 
-
+const allTodoObjects = [];
 const allTodos = [];
 const todayTodos = [];
 const weekTodos = [];
