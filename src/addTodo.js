@@ -35,7 +35,9 @@ function readForm(){
 const createTodo = function(todo){
     const addTitle = function() {
         const container = document.createElement("div");
-        container.textContent = todo.title;
+        const title = document.createElement("p");
+        title.textContent = todo.title;
+        container.appendChild(title);
         container.classList.add("todo");
         return container;
     }
@@ -75,23 +77,13 @@ const createTodo = function(todo){
         removeIcon.classList.toggle("removeIcon");
         return removeContainer;
     }
-    const addEditBtn = function(){
-        const editContainer = document.createElement("div");
-        const editIcon = document.createElement("img");
-        editIcon.src = edit;
-        editContainer.appendChild(editIcon);
-        editIcon.classList.toggle("editIcon");
-        return editContainer;
-
-    }
-    return {addTitle, addDescription, addDueDate, addCompleteBtn, addRemoveBtn, addEditBtn};
+    return {addTitle, addDescription, addDueDate, addCompleteBtn, addRemoveBtn};
 }
 
 function combineFields(todo){
     const container = createTodo(todo).addTitle();
     container.appendChild(createTodo(todo).addCompleteBtn());
     container.appendChild(createTodo(todo).addRemoveBtn());
-    container.appendChild(createTodo(todo).addEditBtn());
     container.appendChild(createTodo(todo).addDescription());
     container.appendChild(createTodo(todo).addDueDate());
     return container;

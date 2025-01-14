@@ -10,9 +10,14 @@ function addRemoveLogic(removeBtnContainer){
         todo.remove();
     })
 }
-
 function cleanArrays(todo, todoArray){
     let index = todoArray.indexOf(todo);
-    todoArray.splice(index, 1);
+    if (index !== -1){
+        todoArray.splice(index, 1);
+    }
 }
+
+
+
+
 export {addRemoveLogic};
