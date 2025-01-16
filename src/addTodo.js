@@ -2,12 +2,13 @@ import {allTodos, organizeByDate, todayTodos, weekTodos} from "./organizeDate";
 import calendar from "./icons/calendar.svg";
 import remove from "./icons/remove.svg";
 import { addEditLogic, addRemoveLogic } from "./todoController";
-import { loadPages, loadTodos } from "./loadPages";
+import { pageTracker, loadTodos, projectIndex} from "./loadPages";
 import { readForm } from "./forms";
-import { domManager } from "./domManager";
+import { addToProject, projects } from "./projectsController";
 
-const createTodo = function(todo){
-    const addTitle = function() {
+
+const createTodo = function(){
+    const addTitle = function(todo) {
         const container = document.createElement("div");
         const title = document.createElement("p");
         title.classList.toggle("title");
@@ -16,14 +17,14 @@ const createTodo = function(todo){
         container.classList.add("todo");
         return container;
     }
-    const addDescription = function(){
+    const addDescription = function(todo){
         const description = document.createElement("p");
         description.textContent = todo.description;
         description.classList.toggle("hidden");
         return description;
 
     }
-    const addDueDate = function() {
+    const addDueDate = function(todo) {
         const date = document.createElement("div");
         date.classList.toggle("date");
         if (todo.dueDate !== ""){
@@ -37,7 +38,7 @@ const createTodo = function(todo){
         }
         return date;
     }
-    const addPriority = function(completeBtn){
+    const addPriority = function(todo){
         const priority = document.createElement("div");
         priority.textContent = todo.priority;
         priority.classList.toggle("hidden");
@@ -69,15 +70,15 @@ const createTodo = function(todo){
 }
 
 function combineFields(todo){
-    const container = createTodo(todo).addTitle();
-    const completeBtn = createTodo(todo).addCompleteBtn();
+    const container = createTodo().addTitle(todo);
+    const completeBtn = createTodo().addCompleteBtn();
     showPriority(todo.priority, completeBtn);
-    container.appendChild(createTodo(todo).addDescription());
-    container.appendChild(createTodo(todo).addDueDate());
-    container.appendChild(createTodo(todo).addPriority());
+    container.appendChild(createTodo().addDescription(todo));
+    container.appendChild(createTodo().addDueDate(todo));
+    container.appendChild(createTodo().addPriority(todo));
     container.appendChild(completeBtn);
-    container.appendChild(createTodo(todo).addRemoveBtn());
-    container.appendChild(createTodo(todo).addExpandBtn());
+    container.appendChild(createTodo().addRemoveBtn());
+    container.appendChild(createTodo().addExpandBtn());
     return container;
 }
 
@@ -99,16 +100,22 @@ function showPriority(priority, completeBtn){
 
 function addTodo(){
     const todo = readForm();
-    organizeByDate(todo);
-    if (loadPages().pageTracker == "todos"){
-        loadTodos(allTodos);
+    if (pageTracker == "project"){
+        addToProject(projectIndex, todo);
+        loadTodos(projects[projectIndex]);
     }
-    if (loadPages().pageTracker == "today"){
-        loadTodos(todayTodos);
-    }
-    if (loadPages().pageTracker == "week"){
-        loadTodos(weekTodos);
+    else{
+        organizeByDate(todo);
+        if (pageTracker == "todos"){
+            loadTodos(allTodos);
+        }
+        if (pageTracker == "today"){
+            loadTodos(todayTodos);
+        }
+        if (pageTracker == "week"){
+            loadTodos(weekTodos);
+        }
     }
 }
 
-export{combineFields, addTodo, showPriority};
+export{combineFields, addTodo, showPriority ,createTodo};

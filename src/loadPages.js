@@ -1,31 +1,40 @@
-import { combineFields } from "./addTodo";
 import { domManager } from "./domManager";
 import { allTodos, todayTodos, weekTodos} from "./organizeDate";
+import { addProjects, loadProjects } from "./projectsController";
 
+let pageTracker = "todos";
+let projectIndex = 0;
 const loadPages = function() {
-    let pageTracker = "todos";
     const todos = function() {
         domManager.todoTab.addEventListener("click", () => {
             clearPage();
             loadTodos(allTodos);
-            pageTracker = "todos";
+            updatePageTracker("todos");
         });
     }
     const today = function(){
         domManager.todayTab.addEventListener("click", () => {
             clearPage();
             loadTodos(todayTodos);
-            pageTracker = "today";
+            updatePageTracker("today");
         });
     }
     const week = function(){
         domManager.weekTab.addEventListener("click", () => {
             clearPage();
             loadTodos(weekTodos);
-            pageTracker = "week"
+            updatePageTracker("week");
         });
     }
-    return {todos, today, week, pageTracker};
+
+    const loadProject = function(todos, index){
+        clearPage();
+        loadTodos(todos);
+        projectIndex = index;
+        updatePageTracker("project");
+    }
+
+    return {todos, today, week, loadProject};
 }
 
 function loadTodos(todos){
@@ -39,13 +48,18 @@ function clearPage(){
     for (let i = all.length - 1; i >= 0; i--) {
         domManager.content.removeChild(all[i]);
       }
+}
 
+function updatePageTracker(update){
+    pageTracker = update;
 }
 
 function loadAllPages(){
     loadPages().todos();
     loadPages().today();
     loadPages().week();
+    loadProjects();
+    addProjects();
 }
 
-export{loadAllPages, loadPages, loadTodos};
+export{loadAllPages, loadPages, loadTodos, clearPage,updatePageTracker, pageTracker,projectIndex};

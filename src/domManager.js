@@ -21,7 +21,8 @@ const domManager = {
     priorityExpand : document.querySelectorAll("input[name='priorityExpand']"),
     cancelBtnExpand : document.querySelector("#cancelBtnExpand"),
     saveBtnExpand : document.querySelector("#saveBtnExpand"),
-    
+    allProjects : document.querySelector(".allProjects"),
+    addProject : document.querySelector("#addProject")
 }
 
 export{domManager};

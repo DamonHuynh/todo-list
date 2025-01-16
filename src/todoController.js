@@ -2,11 +2,14 @@ import { showPriority } from "./addTodo";
 import { domManager } from "./domManager";
 import { readRadioForm } from "./forms";
 import { allTodos, todayTodos, weekTodos, reorganizeTodos} from "./organizeDate";
+import { projects } from "./projectsController";
+import { projectIndex } from "./loadPages";
 
 function addRemoveLogic(removeBtnContainer){
     removeBtnContainer.addEventListener("click", () =>{
         const todo = removeBtnContainer.parentNode;
         cleanAllArrays(todo);
+        cleanProjectsArray(todo);
         todo.remove();
     })
 }
@@ -72,13 +75,21 @@ function cleanArray(todo, todoArray){
     }
 }
 
+function cleanProjectsArray(removedTodo){
+    if(projects.length == 0){
+        return;
+    }
+    const todos =  projects[projectIndex];
+    const index = todos.indexOf(removedTodo);
+    if (index !== -1){
+        todos.splice(index, 1);
+    }    
+}
+
 function cleanAllArrays(todo){
     cleanArray(todo, allTodos);
     cleanArray(todo, todayTodos);
     cleanArray(todo, weekTodos);
 }
-
-
-
 
 export {addRemoveLogic, addEditLogic, cleanArray};
