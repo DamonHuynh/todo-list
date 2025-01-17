@@ -14,11 +14,6 @@ function addProjects(){
     domManager.addProject.addEventListener("click", () => {
         domManager.allProjects.classList.remove("hidden");
         const newProject = document.createElement("div");
-        const projectName = document.createElement("p");
-        projectName.setAttribute("contenteditable", "true");
-        newProject.appendChild(projectName);
-        projectName.textContent = "New Project";
-        projectNames.push(newProject);
         newProject.classList.toggle("project");
         domManager.allProjects.appendChild(newProject);
         const todos = [];
@@ -28,6 +23,13 @@ function addProjects(){
         removeBtn.textContent = "X";
         newProject.appendChild(removeBtn);
         addProjectRemoveLogic(removeBtn);
+        const projectName = document.createElement("p");
+        projectName.classList.add("projectName");
+        newProject.appendChild(projectName);
+        projectName.textContent = "New Project";
+        projectNames.push(projectName);
+        localStorage.setItem("projects", JSON.stringify(projects));
+        localStorage.setItem("projectNames", JSON.stringify(projectNames));
         newProject.addEventListener("click", () =>{
             let index = projects.indexOf(todos);
             loadPages().loadProject(todos, index);
@@ -48,6 +50,7 @@ function addProjectRemoveLogic(removeBtn){
         projectNames.splice(projectIndex, 1);
         removeBtn.parentNode.remove();
         updatePageTracker("todos");
+        loadPages().home();
         event.stopPropagation();
     })
 }
@@ -55,7 +58,7 @@ function addProjectRemoveLogic(removeBtn){
 function switchProjectRemoveButtons(){
     const elements = domManager.allProjects.children;
     for (let i = 0; i < elements.length; i++){
-        const removeBtn = elements[i].children[1];
+        const removeBtn = elements[i].children[0];
         if (removeBtn.classList.contains("hidden") && i == projectIndex){
             removeBtn.classList.remove("hidden");
         }
@@ -64,4 +67,13 @@ function switchProjectRemoveButtons(){
         }
     }
 }
-export {loadProjects, addProjects, addToProject, projects};
+
+function editProjectTitle(){
+    const title = domManager.content.children[0];
+    title.addEventListener("input", (event) =>{
+        projectNames[projectIndex].textContent = event.target.textContent;
+    });
+
+}
+
+export {loadProjects, addProjects, addToProject, editProjectTitle,projectNames, projects};

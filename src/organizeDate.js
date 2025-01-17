@@ -1,21 +1,30 @@
 import {differenceInCalendarDays} from "date-fns";
 import { combineFields } from "./addTodo";
 import { cleanArray } from "./todoController";
+import { updateLocalStorage } from "./localStorage";
 
-const allTodos = [];
-const todayTodos = [];
-const weekTodos = [];
+let allTodos = [];
+let todayTodos = [];
+let weekTodos = [];
+let allTodosObj = [];
+let todayTodosObj = [];
+let weekTodosObj = [];
+
 
 function organizeByDate(todo){
     const difference = getDifference(todo.dueDate);
     const nodeTodo = combineFields(todo);
     allTodos.push(nodeTodo);
+    allTodosObj.push(todo);
     if (difference == 0){
         todayTodos.push(nodeTodo);
+        todayTodosObj.push(todo);
     }
     if (difference < 7){
         weekTodos.push(nodeTodo);
+        weekTodosObj.push(todo);
     }
+    updateLocalStorage();
 }
 
 function getDifference(dueDateString){
@@ -75,5 +84,17 @@ function reorganizeTodos(){
     }
 }
 
-export{organizeByDate, reorganizeTodos,allTodos, todayTodos, weekTodos};
+function updateAllTodos(allTodosArr, todayTodosArr, weekTodosArr){
+    allTodos = allTodosArr;
+    todayTodos = todayTodosArr;
+    weekTodos = weekTodosArr;
+}
+function updateAllTodosObj(allTodosArr, todayTodosArr, weekTodosArr){
+    allTodosObj = structuredClone(allTodosArr);
+    todayTodosObj = structuredClone(todayTodosArr);
+    weekTodosObj = structuredClone(weekTodosArr);
+}
+
+
+export{organizeByDate, reorganizeTodos,allTodos, todayTodos, weekTodos ,allTodosObj, todayTodosObj, weekTodosObj, updateAllTodos,updateAllTodosObj};
 

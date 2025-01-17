@@ -13,7 +13,7 @@
 
 body{
     display: grid;
-    grid-template-columns: 1fr 1fr 4fr 1fr;
+    grid-template-columns: 2fr 1fr 4fr 1fr;
     background-color: var(--main-background);
     color: var(--text);
     height: 100vh;
@@ -30,6 +30,9 @@ body{
     height: 100vh;
     position: sticky;
     font-size: 1.5rem;
+    max-width: 15vw;
+    overflow: scroll;
+    scrollbar-width: none;
 }
 .todoStuff{
     display: flex;
@@ -65,7 +68,7 @@ body{
     text-align: center;
     font-size: 3rem;
     padding: 1rem;
-    position: relative;
+    position: sticky;
     bottom: 3rem;
     cursor: pointer;
 }
@@ -140,6 +143,8 @@ body{
 }
 
 .project{
+    display: flex;
+    gap: 10px;
     position: relative;
     left: 1rem;
     font-size: 1rem;
@@ -148,4 +153,5 @@ body{
 
 .project > p {
     font-size: 1rem;
+    
 }

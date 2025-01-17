@@ -1,9 +1,10 @@
 import { showPriority } from "./addTodo";
 import { domManager } from "./domManager";
 import { readRadioForm } from "./forms";
-import { allTodos, todayTodos, weekTodos, reorganizeTodos} from "./organizeDate";
+import { allTodos, todayTodos, weekTodos, allTodosObj, weekTodosObj, todayTodosObj, reorganizeTodos} from "./organizeDate";
 import { projects } from "./projectsController";
 import { projectIndex } from "./loadPages";
+import { updateLocalStorage } from "./localStorage";
 
 function addRemoveLogic(removeBtnContainer){
     removeBtnContainer.addEventListener("click", () =>{
@@ -42,9 +43,7 @@ function edit(expandBtn){
     //elements[4] is the complete button
     showPriority(priority, elements[4]);
     reorganizeTodos();
-    console.log(allTodos);
-    console.log(todayTodos);
-    console.log(weekTodos);
+    updateLocalStorage();
 }
 
 
@@ -68,10 +67,12 @@ function checkRadio(radios, priority){
     }
 }
 
-function cleanArray(todo, todoArray){
+function cleanArray(todo, todoArray, objArray){
     let index = todoArray.indexOf(todo);
     if (index !== -1){
         todoArray.splice(index, 1);
+        objArray.splice(index, 1);
+        updateLocalStorage();
     }
 }
 
@@ -87,9 +88,9 @@ function cleanProjectsArray(removedTodo){
 }
 
 function cleanAllArrays(todo){
-    cleanArray(todo, allTodos);
-    cleanArray(todo, todayTodos);
-    cleanArray(todo, weekTodos);
+    cleanArray(todo, allTodos, allTodosObj);
+    cleanArray(todo, todayTodos,todayTodosObj);
+    cleanArray(todo, weekTodos,weekTodosObj);
 }
 
 export {addRemoveLogic, addEditLogic, cleanArray};
