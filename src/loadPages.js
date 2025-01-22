@@ -1,6 +1,6 @@
 import { domManager } from "./domManager";
 import { allTodos, todayTodos, weekTodos} from "./organizeDate";
-import { addProjects, editProjectTitle, loadProjects, projectNames } from "./projectsController";
+import { addProjects, editProjectTitle, showProjects, projectNamesObj, projects } from "./projectsController";
 
 let pageTracker = "todos";
 let projectIndex = 0;
@@ -33,22 +33,23 @@ const loadPages = function() {
         });
     }
 
-    const loadProject = function(todos, index){
+    const loadProject = function(index){
         clearPage();
         projectIndex = index;
         updatePageTracker("project");
-        displayPageTitle(projectNames[index].textContent);
+        displayPageTitle(projectNamesObj[index]);
         editProjectTitle();
-        loadTodos(todos);
+        console.log(projects);
+        loadTodos(projects[index]);
     }
 
     return {todos, today, week, loadProject, home};
 }
 
 function loadTodos(todos){
-    todos.forEach((todo) => {
-        domManager.content.appendChild(todo);
-    });
+    for (let i = 0; i < todos.length; i++){
+        domManager.content.appendChild(todos[i]);
+    }    
 }
 
 function clearPage(){
@@ -75,7 +76,7 @@ function loadAllPages(){
     loadPages().todos();
     loadPages().today();
     loadPages().week();
-    loadProjects();
+    showProjects();
     addProjects();
 }
 

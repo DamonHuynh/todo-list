@@ -1,6 +1,7 @@
 import { domManager } from "./domManager";
 import { Todo } from "./todoClass";
 import { addTodo } from "./addTodo";
+import { editLogic } from "./todoController";
 function todoForm(){
     domManager.addBtn.addEventListener("click", () => {
         domManager.form.reset();
@@ -14,6 +15,7 @@ function todoForm(){
         event.preventDefault();
         addTodo();
     });
+    editLogic();
 }
 
 function readForm(){

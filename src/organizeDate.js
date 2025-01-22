@@ -25,6 +25,7 @@ function organizeByDate(todo){
         weekTodosObj.push(todo);
     }
     updateLocalStorage();
+    console.log(allTodos);
 }
 
 function getDifference(dueDateString){

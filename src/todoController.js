@@ -2,9 +2,11 @@ import { showPriority } from "./addTodo";
 import { domManager } from "./domManager";
 import { readRadioForm } from "./forms";
 import { allTodos, todayTodos, weekTodos, allTodosObj, weekTodosObj, todayTodosObj, reorganizeTodos} from "./organizeDate";
-import { projects } from "./projectsController";
-import { projectIndex } from "./loadPages";
-import { updateLocalStorage } from "./localStorage";
+import { projects, projectsObj } from "./projectsController";
+import { pageTracker, projectIndex } from "./loadPages";
+import { updateLocalStorage, updateLocalStorageProjects } from "./localStorage";
+
+let lastExpandClicked;
 
 function addRemoveLogic(removeBtnContainer){
     removeBtnContainer.addEventListener("click", () =>{
@@ -18,8 +20,12 @@ function addRemoveLogic(removeBtnContainer){
 function addEditLogic(expandBtn){
     expandBtn.addEventListener("click", ()=>{
         domManager.expand.showModal();
+        lastExpandClicked = expandBtn;
         expand(expandBtn);
     });
+}
+
+function editLogic(){
     domManager.cancelBtnExpand.addEventListener("click", (event) =>{
         event.preventDefault();
         domManager.expand.close();
@@ -27,25 +33,53 @@ function addEditLogic(expandBtn){
     domManager.saveBtnExpand.addEventListener("click", (event) =>{
         event.preventDefault();
         domManager.expand.close();
-        edit(expandBtn);
-    })
+        edit();
+})
 }
 
-function edit(expandBtn){
-    const elements = expandBtn.parentNode.children;
-    elements[0].textContent = domManager.titleExpand.value;
-    elements[1].textContent = domManager.descriptionExpand.value;
-    /*replace all - with / so the date will be interpreted in local time */
-    elements[2].textContent = domManager.dueDateExpand.value.replaceAll("-", "/");
+function edit(){
+    const elements = lastExpandClicked.parentNode.children;
+    const title = domManager.titleExpand.value;
+    elements[0].textContent = title;
+    const description = domManager.descriptionExpand.value;
+    elements[1].textContent = description;
+    const dueDate = domManager.dueDateExpand.value.replaceAll("-", "/");
+    elements[2].textContent = dueDate;
     const radios = domManager.priorityExpand;
     const priority = readRadioForm(radios);
     elements[3].textContent = priority;
     //elements[4] is the complete button
     showPriority(priority, elements[4]);
     reorganizeTodos();
+    updateEditedObj(title, description, dueDate, priority, lastExpandClicked.parentNode);
     updateLocalStorage();
+    updateLocalStorageProjects();
 }
 
+function updateEditedObj(title, description, dueDate, priority, element){
+    if (pageTracker !== "project"){
+        const index = allTodos.indexOf(element);
+        const todo = allTodosObj[index];
+        todo.title = title;
+        todo.description = description;
+        todo.dueDate = dueDate;
+        todo.priority = priority;
+    }
+    else{
+        let index = -1;
+        projects.forEach((project) => {
+            let projectIndex = project.indexOf(element)
+            if(projectIndex !== -1){
+                index = project.indexOf(element);
+            }
+        });
+        const project = projectsObj[index];
+        project.title = title;
+        project.description = description;
+        project.dueDate = dueDate;
+        project.priority = priority;
+    }
+}
 
 function expand(expandBtn){
     const elements = expandBtn.parentNode.children;
@@ -81,9 +115,12 @@ function cleanProjectsArray(removedTodo){
         return;
     }
     const todos =  projects[projectIndex];
+    const todosObj = projectsObj[projectIndex];
     const index = todos.indexOf(removedTodo);
     if (index !== -1){
         todos.splice(index, 1);
+        todosObj.splice(index, 1);
+        updateLocalStorageProjects();
     }    
 }
 
@@ -93,4 +130,4 @@ function cleanAllArrays(todo){
     cleanArray(todo, weekTodos,weekTodosObj);
 }
 
-export {addRemoveLogic, addEditLogic, cleanArray};
+export {addRemoveLogic, addEditLogic, cleanArray, editLogic};
