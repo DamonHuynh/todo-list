@@ -88,10 +88,8 @@ function updateAllTodos(allTodosArr){
         organizeByDate(allTodosObj[i], allTodos[i]);
     }
 }
-function updateAllTodosObj(allTodosArr, todayTodosArr, weekTodosArr){
+function updateAllTodosObj(allTodosArr){
     allTodosObj = structuredClone(allTodosArr);
-    todayTodosObj = structuredClone(todayTodosArr);
-    weekTodosObj = structuredClone(weekTodosArr);
 }
 
 

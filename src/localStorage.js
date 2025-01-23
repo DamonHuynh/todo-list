@@ -24,7 +24,7 @@ function loadLocalStorage(){
    const localStorageWeek = JSON.parse(localStorage.getItem("weekTodos"));
    const localStorageProjects = JSON.parse(localStorage.getItem("projects"));
    const localStorageProjectNames = JSON.parse(localStorage.getItem("projectNames"));
-   updateAllTodosObj(localStorageAll, localStorageToday, localStorageWeek);
+   updateAllTodosObj(localStorageAll);
    updateProjectsObj(localStorageProjects, localStorageProjectNames);
    convertToNodes(localStorageAll);
    convertToNodesProjects(localStorageProjects);
