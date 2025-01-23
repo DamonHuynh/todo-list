@@ -98,9 +98,11 @@ function switchProjectRemoveButtons(){
 function editProjectTitle(){
     const title = domManager.content.children[0];
     title.addEventListener("input", (event) =>{
-        projectNamesObj[projectIndex] = event.target.textContent;
-        domManager.allProjects.children[projectIndex].children[1].textContent =  projectNamesObj[projectIndex];
-        updateLocalStorageProjectNames();
+        if (event.target.textContent !== ""){
+            projectNamesObj[projectIndex] = event.target.textContent;
+            domManager.allProjects.children[projectIndex].children[1].textContent =  projectNamesObj[projectIndex];
+            updateLocalStorageProjectNames();
+        }
     });
 }
 function updateProjects(projectsArray){
