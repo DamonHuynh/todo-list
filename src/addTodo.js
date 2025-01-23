@@ -1,5 +1,4 @@
 import {allTodos, organizeByDate, todayTodos, weekTodos} from "./organizeDate";
-import calendar from "./icons/calendar.svg";
 import remove from "./icons/remove.svg";
 import { addEditLogic, addRemoveLogic } from "./todoController";
 import { pageTracker, loadTodos, projectIndex} from "./loadPages";
@@ -28,12 +27,8 @@ const createTodo = function(){
         const date = document.createElement("div");
         date.classList.toggle("date");
         if (todo.dueDate !== ""){
-            const calendarIcon = document.createElement("img");
-            calendarIcon.src = calendar;
-            calendarIcon.classList.toggle("calendarIcon");
             const dueDate = document.createElement("p");
             dueDate.textContent = todo.dueDate;
-            date.appendChild(calendarIcon);
             date.appendChild(dueDate);
         }
         return date;
