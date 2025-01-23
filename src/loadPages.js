@@ -45,6 +45,18 @@ const loadPages = function() {
     return {todos, today, week, loadProject, home};
 }
 
+function loadPage(){
+    if (pageTracker == "todos"){
+        loadTodos(allTodos);
+    }
+    if (pageTracker == "today"){
+        loadTodos(todayTodos);
+    }
+    if (pageTracker == "week"){
+        loadTodos(weekTodos);
+    }
+}
+
 function loadTodos(todos){
     for (let i = 0; i < todos.length; i++){
         domManager.content.appendChild(todos[i]);
@@ -79,4 +91,4 @@ function loadAllPages(){
     addProjects();
 }
 
-export{loadAllPages, loadPages, loadTodos, clearPage,updatePageTracker, pageTracker,projectIndex};
+export{loadAllPages, loadPages, loadTodos, clearPage,updatePageTracker, loadPage,pageTracker,projectIndex};

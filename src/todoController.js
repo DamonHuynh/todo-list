@@ -3,7 +3,7 @@ import { domManager } from "./domManager";
 import { createCurrentDateString, readRadioForm } from "./forms";
 import { allTodos, todayTodos, weekTodos, allTodosObj, weekTodosObj, todayTodosObj, reorganizeTodos} from "./organizeDate";
 import { projects, projectsObj } from "./projectsController";
-import { pageTracker, projectIndex } from "./loadPages";
+import { loadPage, pageTracker, projectIndex } from "./loadPages";
 import { updateLocalStorage, updateLocalStorageProjects } from "./localStorage";
 
 let lastExpandClicked;
@@ -54,6 +54,8 @@ function edit(){
     updateEditedObj(title, description, dueDate, priority, lastExpandClicked.parentNode);
     updateLocalStorage();
     updateLocalStorageProjects();
+    lastExpandClicked.parentNode.remove();
+    loadPage();
 }
 
 function updateEditedObj(title, description, dueDate, priority, element){
