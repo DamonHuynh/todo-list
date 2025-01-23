@@ -3,6 +3,8 @@ import { Todo } from "./todoClass";
 import { addTodo } from "./addTodo";
 import { editLogic } from "./todoController";
 function todoForm(){
+    //sets earliest possible date to today
+    domManager.dueDateForm.setAttribute('min', createCurrentDateString());
     domManager.addBtn.addEventListener("click", () => {
         domManager.form.reset();
         domManager.dialog.showModal();
@@ -16,6 +18,14 @@ function todoForm(){
         addTodo();
     });
     editLogic();
+}
+
+function createCurrentDateString(){
+    const date = new Date().toLocaleDateString().split("/");
+    if (date[0].length == 1){
+        date[0] = "0" + date[0];
+    }
+    return date[2] + "-" + date[0] + "-" + date[1];
 }
 
 function readForm(){
