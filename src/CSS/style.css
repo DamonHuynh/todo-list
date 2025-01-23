@@ -6,6 +6,14 @@
     --sidebar: #262626;
     --text: white;
     --add-todo: #f07f75;
+    --dim-add-todo: #f07f758a;
+    /* find these tmr */
+    --priority-1-inner: #ffb90880;
+    --priority-2-inner: #e85b0480;
+    --priority-3-inner: #9d020280; 
+    --priority-1-border: #ffba08;
+    --priority-2-border: #e85d04;
+    --priority-3-border: #c20006;
     box-sizing: border-box;
     font-family: "Josefin Sans";
     
@@ -23,7 +31,7 @@ body{
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    align-items:start;
+    align-items:stretch;
     gap: 2rem;
     padding: 1rem;
     background-color: var(--sidebar);
@@ -34,6 +42,75 @@ body{
     overflow: scroll;
     scrollbar-width: none;
 }
+
+/* do this stuff tmr */
+form{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    gap: 1rem;
+    width: 25vw;
+    height: 50vh;
+}
+
+form>p{
+    text-decoration: underline;
+    font-size: 1.25rem;
+}
+
+form>div:nth-child(-n + 3){
+    display: flex;
+    flex-direction: column;
+}
+.radio{
+    display: flex;
+    align-items: center;
+}
+
+.radio>label{
+    width: 5rem;
+}
+
+input[type="radio"]{
+    padding: 0;
+    margin: 0;
+    width: 1rem;
+}
+
+label{
+    font-weight: 600;
+    font-size: 1rem;
+}
+input{
+    border:2px solid var(--sidebar);
+    border-radius: 5px;
+    height: 1.5rem;
+    font-size: 1rem;
+}
+
+input:focus{
+    outline: none;
+    border: 2px solid blue;
+}
+
+form>div:last-child{
+    display: flex;
+    justify-content: space-between;
+    height: 2rem;
+}
+
+form>div:last-child>button{
+    width: 40%;
+    border: 2px solid var(--add-todo);
+    background-color: var(--dim-add-todo);
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+form>div:last-child>button:hover{
+    background-color: var(--add-todo);
+}
+
 .todoStuff{
     display: flex;
     flex-direction: column;
@@ -53,9 +130,38 @@ body{
 }
 
 #addBtn{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
     color: var(--add-todo);
     cursor: pointer;
+    background: none;
+    font-weight: 800;
+    border: none;
+    width: initial;
+    text-align: start;
+    font-size: 1rem;
+}
 
+#plusTodo{
+    color: var(--sidebar);
+    background-color: var(--add-todo);
+    border-radius: 50%;
+    height: 2rem;
+    width: 2rem;
+    font-size: 2rem;
+    text-align: center;
+}
+
+
+#addBtn:focus{
+    outline: none;
+}
+
+#addBtn:hover{
+    border-radius: 1rem;
+    background-color: var(--dim-add-todo);
+    color:var(--sidebar);  
 }
 
 #addProject{
@@ -75,18 +181,22 @@ body{
     cursor: pointer;
 }
 
-.calendarIcon, .editIcon, .removeIcon{
-    height: 1rem;
+ .removeIcon{
+    height: 1.5rem;
+    cursor: pointer;
 }
+
+
 
 .todo{
     display: grid;
+    gap:1rem;
     grid-template-columns: 1fr 1fr 8fr 2fr 2fr;
     grid-template-rows: 1fr;
     grid-template-areas: 
     "complete title expand date remove";
     padding: 1rem;
-    border-bottom: .5px solid rgba(128, 128, 128, 0.492);
+    border-bottom: .5px solid rgba(128, 128, 128, 0.5);
 }
 .title{
     font-size: 1rem;
@@ -103,8 +213,8 @@ body{
     height: 1rem;
     width: 1rem;
     border-radius: 50%;
-    background-color: rgba(255, 0, 0, 0.071);
-    border: 2px solid var(--add-todo);
+    border: 2px solid grey;
+    background-color: rgba(128, 128, 128, 0.5);
     cursor: pointer;
     grid-area: complete;
 
@@ -117,10 +227,10 @@ body{
     justify-content: center;
     align-items: center;
 }
+
 .expandBtn{
     grid-area: expand;
     cursor: pointer;
-    border-bottom: 2px dashed grey;
 }
 
 .allProjects{
@@ -134,15 +244,17 @@ body{
 }
 
 
-
 .priority1{
-    background-color: red;
+    background-color: var(--priority-1-inner);
+    border: 2px solid var(--priority-1-border);
 }
 .priority2{
-    background-color: green;
+    background-color: var(--priority-2-inner);
+    border: 2px solid var(--priority-2-border);
 }
 .priority3{
-    background-color: blue;
+    background-color: var(--priority-3-inner);
+    border: 2px solid var(--priority-3-border);
 }
 
 .project{
@@ -172,7 +284,7 @@ h1:focus{
     color: var(--add-todo);
 }
 
-.tabs:active, .project:active, #addBtn:active{
+.tabs:active, .project:active, #addBtn:active, .completeBtn:active, .removeIcon:active, input:active, button:active{
     position: relative;
     top: 1px;
 }
