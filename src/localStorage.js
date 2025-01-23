@@ -26,13 +26,10 @@ function loadLocalStorage(){
    const localStorageProjectNames = JSON.parse(localStorage.getItem("projectNames"));
    updateAllTodosObj(localStorageAll, localStorageToday, localStorageWeek);
    updateProjectsObj(localStorageProjects, localStorageProjectNames);
-   console.log(localStorageAll);
    convertToNodes(localStorageAll);
-   convertToNodes(localStorageToday);
-   convertToNodes(localStorageWeek);
    convertToNodesProjects(localStorageProjects);
 //    convertToParagraphs(localStorageProjectNames);
-   updateAllTodos(localStorageAll, localStorageToday, localStorageWeek);
+   updateAllTodos(localStorageAll);
    updateProjects(localStorageProjects);
    todoForm();
    loadAllPages();
@@ -44,7 +41,6 @@ function convertToNodes(todoArray){
     for (let i = 0; i < todoArray.length; i++){
         todoArray[i] = combineFields(todoArray[i]);
     }
-    console.log(todoArray);
 }
 function convertToNodesProjects(todoArray){
     for (let i = 0; i < todoArray.length; i++){

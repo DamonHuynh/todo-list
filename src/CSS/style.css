@@ -164,6 +164,10 @@ h1{
     border-bottom: 3px solid white;
 }
 
+h1:focus{
+    outline: none;
+}
+
 .tabs:hover, .project:hover{
     color: var(--add-todo);
 }

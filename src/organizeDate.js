@@ -11,11 +11,8 @@ let todayTodosObj = [];
 let weekTodosObj = [];
 
 
-function organizeByDate(todo){
+function organizeByDate(todo, nodeTodo){
     const difference = getDifference(todo.dueDate);
-    const nodeTodo = combineFields(todo);
-    allTodos.push(nodeTodo);
-    allTodosObj.push(todo);
     if (difference == 0){
         todayTodos.push(nodeTodo);
         todayTodosObj.push(todo);
@@ -25,7 +22,6 @@ function organizeByDate(todo){
         weekTodosObj.push(todo);
     }
     updateLocalStorage();
-    console.log(allTodos);
 }
 
 function getDifference(dueDateString){
@@ -48,11 +44,11 @@ function reorganizeTodos(){
         const dateElement = element.children[2]
         const dueDateString = dateElement.textContent;
         const difference = getDifference(dueDateString);
-        if (difference < 7 & weekTodos.indexOf(element) == -1){
+        if (difference < 7 && weekTodos.indexOf(element) == -1){
             weekTodos.push(element);
         }
-        if (difference == 0 ){
-            cleanArray(element, todayTodos);
+        if (difference == 0 && todayTodos.indexOf(element) == -1){
+            cleanArray(element, todayTodos, todayTodosObj);
             break;
         }
     }
@@ -65,8 +61,9 @@ function reorganizeTodos(){
         if (difference < 7 && weekTodos.indexOf(element) == -1){
             weekTodos.push(element);
         }
-        if (difference == 0 && todayTodos.indexOf(element) == -1){
-            todayTodos.push(element)
+        if (difference !== 0){
+            cleanArray(element, todayTodos, todayTodosObj);
+            break;
         }
     }
  
@@ -79,16 +76,19 @@ function reorganizeTodos(){
             todayTodos.push(element)
         }
         if (!(difference < 7)){
-            cleanArray(element, weekTodos);
+            cleanArray(element, weekTodos, weekTodosObj);
             break;
         }
     }
 }
 
-function updateAllTodos(allTodosArr, todayTodosArr, weekTodosArr){
+function updateAllTodos(allTodosArr){
     allTodos = allTodosArr;
-    todayTodos = todayTodosArr;
-    weekTodos = weekTodosArr;
+    for (let i = 0; i < allTodos.length; i++){
+        organizeByDate(allTodosObj[i], allTodos[i]);
+    }
+    console.log(todayTodos);
+    console.log(weekTodos);
 }
 function updateAllTodosObj(allTodosArr, todayTodosArr, weekTodosArr){
     allTodosObj = structuredClone(allTodosArr);
