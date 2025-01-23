@@ -49,4 +49,4 @@ function readRadioForm(radios){
     return value;
 }
 
-export{todoForm, readForm, readRadioForm};
+export{todoForm, readForm, readRadioForm, createCurrentDateString};

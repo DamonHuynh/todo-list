@@ -39,7 +39,6 @@ const loadPages = function() {
         updatePageTracker("project");
         displayPageTitle(projectNamesObj[index]);
         editProjectTitle();
-        console.log(projects);
         loadTodos(projects[index]);
     }
 

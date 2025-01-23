@@ -1,6 +1,6 @@
 import { showPriority } from "./addTodo";
 import { domManager } from "./domManager";
-import { readRadioForm } from "./forms";
+import { createCurrentDateString, readRadioForm } from "./forms";
 import { allTodos, todayTodos, weekTodos, allTodosObj, weekTodosObj, todayTodosObj, reorganizeTodos} from "./organizeDate";
 import { projects, projectsObj } from "./projectsController";
 import { pageTracker, projectIndex } from "./loadPages";
@@ -87,6 +87,7 @@ function expand(expandBtn){
     domManager.descriptionExpand.value = elements[1].textContent;
     //Need to use - instead of / for date formatting
     domManager.dueDateExpand.value = elements[2].textContent.replaceAll("/","-");
+    domManager.dueDateExpand.setAttribute('min', createCurrentDateString());
     const priority = elements[3].textContent;
     const radios = domManager.priorityExpand;
     checkRadio(radios, priority);
@@ -106,6 +107,7 @@ function cleanArray(todo, todoArray, objArray){
     if (index !== -1){
         todoArray.splice(index, 1);
         objArray.splice(index, 1);
+        console.log(objArray);
         updateLocalStorage();
     }
 }
