@@ -87,8 +87,6 @@ function updateAllTodos(allTodosArr){
     for (let i = 0; i < allTodos.length; i++){
         organizeByDate(allTodosObj[i], allTodos[i]);
     }
-    console.log(todayTodos);
-    console.log(weekTodos);
 }
 function updateAllTodosObj(allTodosArr, todayTodosArr, weekTodosArr){
     allTodosObj = structuredClone(allTodosArr);

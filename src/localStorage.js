@@ -28,7 +28,6 @@ function loadLocalStorage(){
    updateProjectsObj(localStorageProjects, localStorageProjectNames);
    convertToNodes(localStorageAll);
    convertToNodesProjects(localStorageProjects);
-//    convertToParagraphs(localStorageProjectNames);
    updateAllTodos(localStorageAll);
    updateProjects(localStorageProjects);
    todoForm();
@@ -50,13 +49,5 @@ function convertToNodesProjects(todoArray){
         }
     }
 }
-// function convertToParagraphs(projectNames){
-//     for (let i = 0; i < projectNames.length; i++){
-//         const p = document.createElement("p");
-//         const name = projectNames[i]
-//         p.textContent = name;
-//         projectNames[i] = p;
-//     }
-// }
 
 export{loadLocalStorage, updateLocalStorage, updateLocalStorageProjects, updateLocalStorageProjectNames}
