@@ -53,7 +53,9 @@ body{
 }
 
 #addBtn{
-    color: var(--add-todo)
+    color: var(--add-todo);
+    cursor: pointer;
+
 }
 
 #addProject{
@@ -101,7 +103,9 @@ body{
     height: 1rem;
     width: 1rem;
     border-radius: 50%;
-    background-color: blue;
+    background-color: rgba(255, 0, 0, 0.071);
+    border: 2px solid var(--add-todo);
+    cursor: pointer;
     grid-area: complete;
 
 }
@@ -115,9 +119,10 @@ body{
 }
 .expandBtn{
     grid-area: expand;
-    background-color: white;
     cursor: pointer;
+    border-bottom: 2px dashed grey;
 }
+
 .allProjects{
     display: flex;
     flex-direction: column;
@@ -128,9 +133,7 @@ body{
     display: none;
 }
 
-#expand{
-    background-color: white;
-}
+
 
 .priority1{
     background-color: red;
@@ -153,5 +156,19 @@ body{
 
 .project > p {
     font-size: 1rem;
-    
+}
+
+h1{
+    color: var(--add-todo);
+    font-size: 1.5rem;
+    border-bottom: 3px solid white;
+}
+
+.tabs:hover, .project:hover{
+    color: var(--add-todo);
+}
+
+.tabs:active, .project:active, #addBtn:active{
+    position: relative;
+    top: 1px;
 }
