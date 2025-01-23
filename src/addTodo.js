@@ -1,7 +1,7 @@
 import {allTodos, allTodosObj, organizeByDate, todayTodos, weekTodos} from "./organizeDate";
 import remove from "./icons/remove.svg";
 import { addEditLogic, addRemoveLogic } from "./todoController";
-import { pageTracker, loadTodos, projectIndex} from "./loadPages";
+import { pageTracker, loadTodos, projectIndex, loadPage} from "./loadPages";
 import { readForm } from "./forms";
 import { addToProject, projects } from "./projectsController";
 
@@ -104,15 +104,7 @@ function addTodo(){
         allTodos.push(nodeTodo);
         allTodosObj.push(todo);
         organizeByDate(todo, nodeTodo);
-        if (pageTracker == "todos"){
-            loadTodos(allTodos);
-        }
-        if (pageTracker == "today"){
-            loadTodos(todayTodos);
-        }
-        if (pageTracker == "week"){
-            loadTodos(weekTodos);
-        }
+        loadPage();
     }
 }
 

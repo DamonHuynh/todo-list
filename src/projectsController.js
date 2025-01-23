@@ -86,7 +86,7 @@ function switchProjectRemoveButtons(){
     const elements = domManager.allProjects.children;
     for (let i = 0; i < elements.length; i++){
         const removeBtn = elements[i].children[0];
-        if (removeBtn.classList.contains("hidden") && i == projectIndex){
+        if (i == projectIndex){
             removeBtn.classList.remove("hidden");
         }
         else{
